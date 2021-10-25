@@ -25,7 +25,7 @@ function App() {
 
   !equalResult ? setProgress((prev) => prev + value) : setProgress(value)
 
-  //if first entry and no result
+  //notResult Exists Operations
   if (result === '') {
    setEqualResult(0)
 
@@ -34,10 +34,8 @@ function App() {
     setProgress('')
     setResult('')
    }
-   if (isNumber && isFirstEntry) {
-    //setProgress('')
+   if (isNumber && isFirstEntry)
     setStates({ ...states, firstNum: states.firstNum + value })
-   }
 
    if (!isNumber && isFirstEntry) {
     setStates({ ...states, operator: value })
@@ -59,7 +57,7 @@ function App() {
     setStates(initialStates)
    }
 
-   //if result already exists
+   //isResultExist Operations
   } else {
    if (isNumber && states.operator === '=') {
     setProgress('')
@@ -80,7 +78,6 @@ function App() {
   }
  }
 
- console.log(states, Boolean(result), result, equalResult)
  return (
   <div className='container'>
    <div className='calculator'>
