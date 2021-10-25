@@ -57,6 +57,7 @@ function App() {
     setStates({ firstNum: '', nextNum: '', operator: value })
     setIsFirstEntry(!isFirstEntry)
    }
+
    if (value === '=') {
     setResult('')
     setEqualResult(operate(states.firstNum, states.operator, states.nextNum))
@@ -69,12 +70,15 @@ function App() {
     setProgress('')
     setResult('')
    }
+
    if (isNumber && value !== '=')
     setStates({ ...states, nextNum: states.nextNum + value })
+
    if (!isNumber) {
     setResult(operate(result, states.operator, states.nextNum))
     setStates({ ...states, operator: value, nextNum: '' })
    }
+
    if (value === '=') {
     setResult('')
     setEqualResult(operate(result, states.operator, states.nextNum))
