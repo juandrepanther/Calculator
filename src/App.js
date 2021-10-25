@@ -10,11 +10,15 @@ const initialStates = {
 }
 
 function App() {
+ //ALL STATES
+
  const [states, setStates] = useState(initialStates)
  const [isFirstEntry, setIsFirstEntry] = useState(true)
  const [result, setResult] = useState('')
  const [equalResult, setEqualResult] = useState(0)
  const [progress, setProgress] = useState('')
+
+ //MAIN DATA OPERATION FUNCTION
 
  const operate = (firstNum, operator, nextNum) =>
   eval(`${firstNum}${operator}${nextNum}`)
@@ -23,9 +27,12 @@ function App() {
   const value = e.target.innerHTML
   const isNumber = value === '.' ? true : !isNaN(value)
 
+  //PROGRESS DATA LOGIC
+
   !equalResult ? setProgress((prev) => prev + value) : setProgress(value)
 
-  //notResult Exists Operations
+  //NOT RESULT EXISTS OPERATIONS
+
   if (result === '') {
    setEqualResult(0)
 
@@ -51,13 +58,12 @@ function App() {
     setIsFirstEntry(!isFirstEntry)
    }
    if (value === '=') {
-    console.log('equal value')
     setResult('')
     setEqualResult(operate(states.firstNum, states.operator, states.nextNum))
     setStates(initialStates)
    }
 
-   //isResultExist Operations
+   //IS RESULT EXISTS OPERATIONS
   } else {
    if (isNumber && states.operator === '=') {
     setProgress('')
@@ -72,7 +78,6 @@ function App() {
    if (value === '=') {
     setResult('')
     setEqualResult(operate(result, states.operator, states.nextNum))
-    console.log('result')
     setStates(initialStates)
    }
   }
