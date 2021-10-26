@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 const btns = [7, 8, 9, '/', 4, 5, 6, '*', 1, 2, 3, '-', '.', 0, '=', '+']
@@ -17,11 +17,23 @@ function App() {
  const [result, setResult] = useState('')
  const [equalResult, setEqualResult] = useState(0)
  const [progress, setProgress] = useState('')
+ const [checked, setChecked] = useState(false)
+ const [background, setBackground] = useState({})
 
  //MAIN DATA OPERATION FUNCTION
 
  const operate = (firstNum, operator, nextNum) =>
   eval(`${firstNum}${operator}${nextNum}`)
+
+ //THEME SWITCH
+
+ const toggleHandler = (e) => setChecked(!checked)
+
+ useEffect(() => {
+  return checked ? setBackground({ background: 'white' }) : setBackground({})
+ }, [checked])
+
+ //OPERATIONS MAIN HANDLER
 
  const btnHandler = (e) => {
   const value = e.target.innerHTML
@@ -88,11 +100,11 @@ function App() {
  }
 
  return (
-  <div className='container'>
+  <div className='container' style={background}>
    <div className='calculator'>
     <div className='calculator-theme'>
      <label className='switch'>
-      <input type='checkbox' />
+      <input type='checkbox' checked={checked} onChange={toggleHandler} />
       <div className='slider'></div>
      </label>
     </div>
